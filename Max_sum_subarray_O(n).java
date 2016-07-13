@@ -1,3 +1,4 @@
+//Kadane's Algorithm
 //Ja naogja najgolemata suma na podniza od dadena niza.
 //Dokoloku site elementi na nizata se negativni, se pecati 0.
 
