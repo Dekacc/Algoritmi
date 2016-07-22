@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class Main {
-    
     //NAIVE ITTERATIVE O(n^3)
     public static long[][] mat_multiply(long[][] A, long[][] B, long MOD){
         int widthA = A[0].length;
@@ -13,7 +12,7 @@ public class Main {
             for(int j = 0; j<widthB; j++){
                 C[i][j] = 0;
                 for(int k = 0; k<widthA; k++){
-                    C[i][j] += A[i][k] * B[k][j];
+                    C[i][j] += (A[i][k]%MOD) * (B[k][j]%MOD);
                     C[i][j] %= MOD;               //comment this line if no mod is required
                 }
             }
@@ -21,21 +20,12 @@ public class Main {
         return C;
     }
 
-    public static long[][] mat_power(long[][] mat, long pow, long MOD){
-        //returns mat^pow in O(log(pow)) iteratively
+    //RECURSIVE DIVIDE-AND-CONQUER ALGORITHM FOR MATRIX EXPONENTIAITON IN O(N^3 * log(pow)) TIME
+    public static long[][] mat_power(long[][] mat, long pow, long MOD)
+    {
         if(pow == 1) return mat;
-        long[][] tmp = mat;
-        boolean first = true;
-        while(pow > 1){
-            if(pow % 2 == 1){
-                if(!first) tmp = mat_multiply(tmp, mat, MOD);
-                else first = false;
-            }
-            mat = mat_multiply(mat, mat, MOD);
-            pow /= 2;
-        }
-        if(first) return mat;
-        else return mat_multiply(mat, tmp, MOD);
+        if(pow % 2 == 0) return mat_power(mat_multiply(mat, mat, MOD), pow/2, MOD);
+        return mat_multiply(mat, mat_power(mat_multiply(mat, mat, MOD), pow/2, MOD), MOD);
     }
 
     public static void main(String[] args){
