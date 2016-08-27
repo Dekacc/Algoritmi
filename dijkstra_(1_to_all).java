@@ -41,7 +41,7 @@ public class Main {
 					int length = current.shortest + e.length;
 					if(length < ver[e.dest].shortest){
 						ver[e.dest].shortest = length;
-						//update the placement in prioQueue
+						//update the placement in prioQueue 
 						pq.remove(ver[e.dest]);
 						pq.add(ver[e.dest]);
 					}
