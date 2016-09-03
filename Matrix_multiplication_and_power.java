@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+//HINT: if slow, unroll the loops where possible
+
 public class Main {
     //NAIVE ITTERATIVE O(n^3)
     public static long[][] mat_multiply(long[][] A, long[][] B, long MOD){
