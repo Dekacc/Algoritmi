@@ -41,6 +41,7 @@ public class Main {
                         			if(newDist < ver[e.dest].shortest){
                             				pq.add(new Pair(e.dest, newDist));
                             				ver[e.dest].shortest = newDist;
+                            				//ver[e.dest].predecessor = current.destination; //if the shortest path is required
                         			}
                     			}
                 		}
