@@ -58,7 +58,7 @@ public class Main {
 	}
 }
 
-class Pair implements Comparable<Pair>{
+class Pair implements Comparable<Pair> {
     	int destination;
     	int distance;
     	Pair(int dest, int dist){
@@ -72,7 +72,7 @@ class Pair implements Comparable<Pair>{
 	}
 }
 
-class Vertex implements Comparable<Vertex> {
+class Vertex {
 	int shortest;
 	ArrayList<Edge> edges;
 
