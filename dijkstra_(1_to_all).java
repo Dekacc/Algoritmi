@@ -47,13 +47,14 @@ public class Main {
             		}
 
 			//PRINT
-			for(int i = 0; i < V; i++){
-				if(i == start) continue;
-				int length = ver[i].shortest;
-				if(length == Integer.MAX_VALUE) System.out.print("-1 "); //no path
-				else System.out.print(length + " ");
-			}
-			System.out.println();
+			StringBuilder sb = new StringBuilder();
+            		for(int i = 0; i < V; i++){
+                		if(i == start) continue;
+                		int length = ver[i].shortest;
+                		if(length == Integer.MAX_VALUE) sb.append("-1 "); //no path
+                		else sb.append(length + " ");
+            		}
+            		System.out.println(sb);
 		}
 	}
 }
