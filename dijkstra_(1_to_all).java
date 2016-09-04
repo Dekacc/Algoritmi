@@ -30,7 +30,7 @@ public class Main {
 			//INPUT ENDS
 			
 			//DIJKSTRA
-			Vertex current = ver[cities[i]];
+			Vertex current = ver[start];
 			current.shortest = 0;
 			current.visited = true;
 			TreeSet<Vertex> pq = new TreeSet<>();
