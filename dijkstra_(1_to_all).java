@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.PriorityQueue;
+import java.util.TreeSet;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
@@ -30,28 +30,27 @@ public class Main {
 			//INPUT ENDS
 			
 			//DIJKSTRA
-			Vertex current = ver[start];
+			Vertex current = ver[cities[i]];
 			current.shortest = 0;
 			current.visited = true;
-			int visited = 1;
-			PriorityQueue<Vertex> pq = new PriorityQueue<>();
-			while(visited < V){
-				for(Edge e : current.edges){
-					if(ver[e.dest].visited) continue;
+			TreeSet<Vertex> pq = new TreeSet<>();
+			pq.add(current);
+			while(!pq.isEmpty()){
+				current = pq.pollFirst();
+				current.visited = true;
+				for (Edge e : current.edges) {
+					if (ver[e.dest].visited)
+						continue;
 					int length = current.shortest + e.length;
-					if(length < ver[e.dest].shortest){
+					if (length < ver[e.dest].shortest) {
+						// update the placement in prioQueue
+						pq.remove(ver[e.dest]);						
 						ver[e.dest].shortest = length;
-						//update the placement in prioQueue 
-						pq.remove(ver[e.dest]);
 						pq.add(ver[e.dest]);
 					}
 				}
-				if(pq.isEmpty()) break;
-				current = pq.remove();
-				if(current.shortest == Integer.MAX_VALUE) break;
-				current.visited = true;
-				visited++;
 			}
+
 			//PRINT
 			for(int i = 0; i < V; i++){
 				if(i == start) continue;
@@ -64,36 +63,43 @@ public class Main {
 	}
 }
 
-class Vertex implements Comparable<Vertex>{
+class Vertex implements Comparable<Vertex> {
 	int index;
 	boolean visited;
 	int shortest;
 	ArrayList<Edge> edges;
-	Vertex(int i){
+
+	Vertex(int i) {
 		visited = false;
 		index = i;
 		shortest = Integer.MAX_VALUE;
 		edges = new ArrayList<>();
 	}
+
 	@Override
 	public int compareTo(Vertex o) {
-		return shortest - o.shortest;
+		//mora vaka za da ne se izbagira treeSetot
+		int dif = shortest - o.shortest;
+		if(dif == 0) return index - o.index;
+		return dif;
 	}
+
 	@Override
 	public int hashCode() {
 		return index;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		return index == ((Vertex) obj).index;
 	}
 }
 
-class Edge{
+class Edge {
 	int dest;
 	int length;
-	Edge(int d, int l){
+
+	Edge(int d, int l) {
 		dest = d;
 		length = l;
 	}
