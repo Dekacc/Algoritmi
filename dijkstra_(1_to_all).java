@@ -33,6 +33,7 @@ public class Solution {
                         if(newDist < ver[e.dest].shortest){
                             pq.add(new Pair(e.dest, newDist));
                             ver[e.dest].shortest = newDist;
+                            ver[e.dest].predecessor = current.destination; //if the shortest path is required
                         }
                     }
                 }
@@ -67,9 +68,11 @@ class Pair implements Comparable<Pair>{
 
 class Vertex{
     int shortest;
+    int predecessor;
     ArrayList<Edge> edges;
     Vertex(){
         shortest = Integer.MAX_VALUE;
+        predecessor = -1;
         edges = new ArrayList<>();
     }
 }
