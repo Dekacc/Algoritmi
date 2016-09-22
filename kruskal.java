@@ -32,9 +32,9 @@ public class Main {
 			}
 		}
 		System.out.println(MSTlength);
-        //long endTime   = System.currentTimeMillis();
-        //long totalTime = endTime - startTime;
-        //System.out.println(totalTime + " ms");
+        	//long endTime   = System.currentTimeMillis();
+        	//long totalTime = endTime - startTime;
+        	//System.out.println(totalTime + " ms");
 	}
 }
 
