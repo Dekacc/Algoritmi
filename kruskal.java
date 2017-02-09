@@ -8,7 +8,6 @@ public class Main {
 		int E = sc.nextInt();
 		
 		UnionFind uf = new UnionFind(V);
-		for(int i = 0; i<V; i++) uf.makeSet(i);
 		
 		Edge[] edges = new Edge[E];
 		for(int i = 0; i<E; i++){
@@ -62,6 +61,7 @@ class UnionFind{
 		parent = new int[N];
 		Arrays.fill(parent, -1);
 		rank = new int[N];
+		for(int i = 0; i < N; i++) makeSet(i);
 	}
 	
 	public void makeSet(int i){
